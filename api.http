@@ -1,0 +1,34 @@
+@hostname = http://localhost:3000
+
+### Get Start Books
+GET {{hostname}}/books
+
+### Get Hello Books
+GET {{hostname}}/books/hello
+
+### Get Dynamic Params Books
+GET {{hostname}}/books/nama-saya
+
+### Post Books
+POST {{hostname}}/books
+Content-Type: application/json
+
+{
+    "conn": "telolet",
+    "adapter": "PdoMySQL",
+    "host": "172.17.62.80",
+    "dbname": "asda",
+    "port": 4040,
+    "username": "admin",
+    "password": "1234"
+}
+
+### Post Params Books
+POST {{hostname}}/books/params
+Content-Type: application/json
+
+{
+    "conn": "telolet",
+    "name": "random",
+    "age": 12
+}
