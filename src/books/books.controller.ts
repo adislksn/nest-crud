@@ -1,25 +1,54 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { BooksService } from './books.service';
 
 @Controller('books')
 export class BooksController {
+  constructor(private booksService: BooksService) {}
+
   @Get()
-  start() {
-    return 'Start Books';
+  getBooks(
+    @Query('title') title: string,
+    @Query('author') author: string,
+    @Query('category') category: string,
+  ) {
+    return this.booksService.getBooks(title, author, category);
   }
-  @Get('/hello')
-  hello() {
-    return 'Hello Books';
+
+  @Get('/:id')
+  getBook(@Param('id') id: string) {
+    return this.booksService.getBook(id);
   }
-  @Get('/:name')
-  helloName(@Param('name') name: string) {
-    return `Hello ${name}`;
-  }
+
   @Post()
-  create(@Body() body: any) {
-    return body;
+  createBook(
+    @Body('title') title: string,
+    @Body('author') author: string,
+    @Body('category') category: string,
+  ) {
+    return this.booksService.createBook(title, author, category);
   }
-  @Post('/params')
-  createParams(@Body('name') name: string, @Body('age') age: number) {
-    return { name, age };
+
+  @Put('/:id')
+  updateBook(
+    @Param('id') id: string,
+    @Body('title') title: string,
+    @Body('author') author: string,
+    @Body('category') category: string,
+  ) {
+    return this.booksService.updateBook(id, title, author, category);
+  }
+
+  @Delete('/:id')
+  deleteBook(@Param('id') id: string) {
+    return this.booksService.deleteBook(id);
   }
 }

@@ -32,3 +32,13 @@ Content-Type: application/json
     "name": "random",
     "age": 12
 }
+
+### Create Books
+POST {{hostname}}/books
+Content-Type: application/x-www-form-urlencoded
+
+{
+    "title": "random",
+    "author": "new",
+    "category": "physics",
+}
